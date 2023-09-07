@@ -7,13 +7,13 @@ CREATE TABLE veiculos (
 						vei_placa VARCHAR (7) NOT NULL UNIQUE, 
                         vei_chassi VARCHAR (17) NOT NULL UNIQUE,  
                         vei_cor VARCHAR (45) NOT NULL, 
-                        vei_modelo VARCHAR (45) NOT NULL, 
                         vei_categoria VARCHAR (45) NOT NULL, 
                         vei_ano_fab INT (4) NOT NULL, 
                         pro_id INT,
-                        vei_modelo INT,
-						FOREIGN KEY (pro_id) REFERENCES proprietarios(pro_id),
-                        FOREIGN KEY (vei_modelo) REFERENCES vei_modelos(modelos_id)
+                        vei_modelo INT (6) NOT NULL
+                       
+						-- FOREIGN KEY (pro_id) REFERENCES proprietarios(pro_id),
+                     --   FOREIGN KEY (vei_modelo) REFERENCES vei_modelos(modelos_id)
                         );
 
 CREATE TABLE proprietarios (
@@ -25,9 +25,9 @@ CREATE TABLE proprietarios (
                             pro_telefone VARCHAR (20) NOT NULL,
                             pro_cidade VARCHAR (100) NOT NULL, 
                             pro_estado VARCHAR(45) NOT NULL,
-                            vei_id INT,
-                            FOREIGN KEY (vei_id) REFERENCES veiculos(vei_id),
-                            FOREIGN KEY (pro_telefone) REFERENCES pro_telefones(pro_id)
+                            vei_id INT
+                           -- FOREIGN KEY (vei_id) REFERENCES veiculos(vei_id),
+                          --  FOREIGN KEY (pro_telefone) REFERENCES pro_telefones(pro_id)
                             );
 
 CREATE TABLE pro_telefones (
@@ -42,3 +42,11 @@ CREATE TABLE vei_modelos(
                          vei_id int,
                          modelo_nome VARCHAR (45) NOT NULL
 						);
+                        
+ALTER TABLE veiculos ADD FOREIGN KEY (pro_id) REFERENCES proprietarios(pro_id);
+ALTER TABLE veiculos ADD FOREIGN KEY (vei_modelo) REFERENCES vei_modelos(modelos_id);
+
+ALTER TABLE proprietarios ADD FOREIGN KEY (vei_id) REFERENCES veiculos(vei_id);
+-- ALTER TABLE proprietarios ADD FOREIGN KEY (pro_telefone) REFERENCES pro_telefones(pro_tel_id);
+
+INSERT INTO proprietarios VALUES ('3434432345', 'oiii', 'rg', 'ert', '345', 'feg', 'ert');
