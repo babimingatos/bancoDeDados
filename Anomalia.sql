@@ -1,7 +1,6 @@
 -- Integridade referencial 
 -- Anomalia de dados: DML-> DELETE e UPDATE 
-	-- As informações podem mudar ao longo do tempo
-    -- Anomalia-> quando 
+-- As informações podem mudar ao longo do tempo
 -- Integridade de FK: DML- INSERT
 
 CREATE DATABASE anomalia;
@@ -10,17 +9,17 @@ USE anomalia;
 
 CREATE TABLE pes_pessoas (
 	pes_cpf INT PRIMARY KEY,
-    pes_nome VARCHAR (45) NOT NULL,
-    pes_nascimento DATE DEFAULT NULL
+	pes_nome VARCHAR (45) NOT NULL,
+	pes_nascimento DATE DEFAULT NULL
 );
 
 CREATE TABLE alu_alunos(
 	alu_ra INT PRIMARY KEY AUTO_INCREMENT,
 	alu_vestibular DATE NOT NULL,
-    alu_cursos VARCHAR (45) NOT NULL,
+	alu_cursos VARCHAR (45) NOT NULL,
 	pes_cpf INT NOT NULL,
-    FOREIGN KEY (pes_cpf)REFERENCES pes_pessoas(pes_cpf)
-    ON UPDATE CASCADE 
+	FOREIGN KEY (pes_cpf)REFERENCES pes_pessoas(pes_cpf)
+	ON UPDATE CASCADE 
     -- DELETE/ UPDATE CASCADE
     -- CASCADE: para a fk, os valores serao cascateados com as atualizações das alterações (se o pai for atualizado, os filhos tbm serão)
 );
@@ -35,10 +34,10 @@ INSERT INTO pes_pessoas VALUES (1234568912, 'AIIII', '2020/09/21');
 INSERT INTO pes_pessoas VALUES
 	(22222,'eiii','2020/09/09'),
 	(33333, 'aa', '2010/09/21'),
-    (132213, 'bb', '2010/08/08'
+        (132213, 'bb', '2010/08/08'
 );
 
--- Sem coisa obrigatória
+-- Sem nada obrigatório
 INSERT INTO pes_pessoas VALUES (
 	666, 'as', NULL
 );
